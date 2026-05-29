@@ -66,10 +66,13 @@ The app will be available at **http://localhost:5173**
 
 ## Features
 
-- **AI Chat** — Streaming chat with Groq Llama 3 70B, markdown rendering, code syntax highlighting, chat history
-- **PDF Analysis** — Upload PDFs, AI-generated summaries, follow-up Q&A with streaming
-- **Task Manager** — Kanban board with drag & drop (To Do / In Progress / In Review / Done), priorities, due dates
+- **AI Chat** — Streaming chat with Groq Llama 3 70B, markdown rendering, code syntax highlighting, chat history, voice input, AI suggestions
+- **PDF Analysis** — Upload PDFs, AI-generated summaries, follow-up Q&A with streaming, document preview
+- **Task Manager** — Kanban board with drag & drop (To Do / In Progress / In Review / Done), priorities, due dates, templates, export/import
 - **Dashboard** — Analytics cards, usage charts (Recharts), activity feed, quick actions
+- **Analytics** — Detailed analytics with real-time data, multiple chart types, team activity
+- **Notifications** — Real-time toast notifications for system events
+- **Keyboard Shortcuts** — Productivity shortcuts for common actions
 - **Auth** — JWT authentication, register/login, protected routes, animated transitions
 - **Workspace** — Profile settings, dark/light theme toggle, password management
 
