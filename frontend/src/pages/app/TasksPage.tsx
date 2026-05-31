@@ -459,7 +459,7 @@ export default function TasksPage() {
             'flex items-center gap-2 px-3 py-2 rounded-lg border transition-all flex-shrink-0',
             isDark ? 'bg-white/[0.03] border-white/[0.08] focus-within:border-violet-500/40' : 'bg-white border-gray-200 focus-within:border-violet-400'
           )}>
-            <Search size={14} className={cn("sm:size-16", isDark ? 'text-white/30' : 'text-gray-400')} />
+            <Search size={16} className={isDark ? 'text-white/30' : 'text-gray-400'} />
             <input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -479,11 +479,11 @@ export default function TasksPage() {
                 isDark ? 'bg-white/[0.03] border-white/[0.08] hover:border-violet-500/40' : 'bg-white border-gray-200 hover:border-violet-400'
               )}
             >
-              <Filter size={14} className={cn("sm:size-16", isDark ? 'text-white/30' : 'text-gray-400')} />
+              <Filter size={16} className={isDark ? 'text-white/30' : 'text-gray-400'} />
               <span className={cn('text-xs sm:text-sm hidden sm:inline', isDark ? 'text-white/60' : 'text-gray-600')}>
                 {filterPriority === 'all' ? 'All' : PRIORITY_CONFIG[filterPriority].label}
               </span>
-              <ChevronDown size={12} className={cn("sm:size-14", isDark ? 'text-white/30' : 'text-gray-400')} />
+              <ChevronDown size={14} className={isDark ? 'text-white/30' : 'text-gray-400'} />
             </motion.button>
 
             <AnimatePresence>
@@ -528,13 +528,13 @@ export default function TasksPage() {
               )}
               title="Export tasks"
             >
-              <Download size={14} className={cn("sm:size-16", isDark ? 'text-white/30' : 'text-gray-400')} />
+              <Download size={16} className={isDark ? 'text-white/30' : 'text-gray-400'} />
             </motion.button>
             <label className={cn(
               'p-2 rounded-lg border transition-all cursor-pointer',
               isDark ? 'bg-white/[0.03] border-white/[0.08] hover:border-violet-500/40' : 'bg-white border-gray-200 hover:border-violet-400'
             )} title="Import tasks">
-              <Upload size={14} className={cn("sm:size-16", isDark ? 'text-white/30' : 'text-gray-400')} />
+              <Upload size={16} className={isDark ? 'text-white/30' : 'text-gray-400'} />
               <input
                 type="file"
                 accept=".json"
@@ -600,7 +600,7 @@ export default function TasksPage() {
             onClick={() => { setDefaultStatus('todo'); setShowModal(true) }}
             className="flex items-center gap-2 bg-gradient-to-r from-violet-600 to-blue-600 text-white text-xs sm:text-sm font-medium px-3 sm:px-4 py-2 rounded-lg flex-shrink-0"
         >
-          <Plus size={14} className="sm:size-16" />
+          <Plus size={16} />
           <span className="hidden sm:inline">Add Task</span>
         </motion.button>
         </div>
@@ -652,7 +652,7 @@ export default function TasksPage() {
                         onClick={() => { setDefaultStatus(col.status); setShowModal(true) }}
                         className={cn('p-1 rounded-md transition-colors', isDark ? 'text-white/20 hover:text-white/50 hover:bg-white/[0.06]' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-200')}
                       >
-                        <Plus size={12} className="sm:size-14" />
+                        <Plus size={14} />
                       </button>
                     </div>
 

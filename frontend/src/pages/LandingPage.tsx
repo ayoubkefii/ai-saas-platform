@@ -71,7 +71,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center glow-purple">
-              <Sparkles size={14} className="text-white sm:size-16" />
+              <Sparkles size={16} className="text-white" />
             </div>
             <span className="font-display font-bold text-sm sm:text-base gradient-text-purple">AI Workspace</span>
           </div>
@@ -138,7 +138,7 @@ export default function LandingPage() {
                 className="w-full sm:w-auto bg-gradient-animated text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-base sm:text-lg flex items-center justify-center gap-2 bg-size-300"
               >
                 Start building free
-                <ArrowRight size={18} className="sm:size-20" />
+                <ArrowRight size={20} />
               </motion.button>
             </Link>
             <Link to="/login" className="w-full sm:w-auto">
@@ -147,7 +147,7 @@ export default function LandingPage() {
                 whileTap={{ scale: 0.97 }}
                 className="w-full sm:w-auto glass border border-white/[0.1] text-white/80 hover:text-white font-medium px-6 sm:px-8 py-3 sm:py-4 rounded-xl text-base sm:text-lg flex items-center justify-center gap-2 transition-colors"
               >
-                <MessageSquare size={18} className="sm:size-20" />
+                <MessageSquare size={20} />
                 See demo
               </motion.button>
             </Link>
@@ -161,7 +161,7 @@ export default function LandingPage() {
           >
             {['No credit card', 'Free forever plan', '500+ teams use it'].map((item) => (
               <div key={item} className="flex items-center gap-2">
-                <Check size={12} className="sm:size-14 text-violet-400" />
+                <Check size={14} className="text-violet-400" />
                 {item}
               </div>
             ))}
@@ -175,7 +175,7 @@ export default function LandingPage() {
           >
             <a href="#features" className="text-white/30 flex flex-col items-center gap-2 hover:text-white/60 transition-colors">
               <span className="text-[10px] sm:text-xs tracking-widest uppercase">Explore</span>
-              <ChevronDown size={18} className="sm:size-20 animate-bounce" />
+              <ChevronDown size={20} className="animate-bounce" />
             </a>
           </motion.div>
         </div>
@@ -188,7 +188,7 @@ export default function LandingPage() {
           <FadeIn>
             <div className="text-center mb-12 sm:mb-20">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-xs sm:text-sm mb-4">
-                <Layers size={12} className="sm:size-14" />
+                <Layers size={14} />
                 Everything you need
               </div>
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
@@ -209,7 +209,7 @@ export default function LandingPage() {
                   className="glass-premium rounded-xl sm:rounded-2xl p-4 sm:p-6 cursor-default group shimmer-effect holographic"
                 >
                   <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300 glow-purple`}>
-                    <Icon size={18} className="sm:size-20 text-white" />
+                    <Icon size={20} className="text-white" />
                   </div>
                   <h3 className="font-display font-semibold text-white mb-2 text-sm sm:text-base">{title}</h3>
                   <p className="text-white/50 text-xs sm:text-sm leading-relaxed">{desc}</p>
@@ -226,7 +226,7 @@ export default function LandingPage() {
           <FadeIn>
             <div className="text-center mb-12 sm:mb-20">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs sm:text-sm mb-4">
-                <Zap size={12} className="sm:size-14" />
+                <Zap size={14} />
                 Simple by design
               </div>
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
@@ -258,7 +258,7 @@ export default function LandingPage() {
           <FadeIn>
             <div className="text-center mb-12 sm:mb-20">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs sm:text-sm mb-4">
-                <Globe size={12} className="sm:size-14" />
+                <Globe size={14} />
                 Simple pricing
               </div>
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
@@ -296,7 +296,7 @@ export default function LandingPage() {
                   <ul className="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
                     {features.map((feat) => (
                       <li key={feat} className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-white/70">
-                        <Check size={12} className="sm:size-14 text-violet-400 flex-shrink-0" />
+                        <Check size={14} className="text-violet-400 flex-shrink-0" />
                         {feat}
                       </li>
                     ))}
@@ -336,7 +336,7 @@ export default function LandingPage() {
                 <motion.div whileHover={{ y: -4 }} className="glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6">
                   <div className="flex mb-3 sm:mb-4">
                     {Array.from({ length: rating }).map((_, j) => (
-                      <Star key={j} size={12} className="sm:size-14 text-yellow-400 fill-yellow-400" />
+                      <Star key={j} size={14} className="text-yellow-400 fill-yellow-400" />
                     ))}
                   </div>
                   <p className="text-white/70 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4">"{text}"</p>
@@ -390,7 +390,7 @@ export default function LandingPage() {
               <div className="absolute inset-0 bg-gradient-to-br from-violet-500/10 to-blue-500/10 pointer-events-none" />
               <div className="relative z-10">
                 <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center mx-auto mb-4 sm:mb-6 glow-purple">
-                  <Sparkles size={22} className="sm:size-28 text-white" />
+                  <Sparkles size={28} className="text-white" />
                 </div>
                 <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
                   Ready to build smarter?
@@ -405,7 +405,7 @@ export default function LandingPage() {
                     className="bg-gradient-animated text-white font-semibold px-6 sm:px-10 py-3 sm:py-4 rounded-xl text-base sm:text-lg flex items-center justify-center gap-2 sm:gap-3 mx-auto"
                   >
                     Start for free
-                    <ArrowRight size={18} className="sm:size-20" />
+                    <ArrowRight size={20} />
                   </motion.button>
                 </Link>
               </div>
@@ -419,7 +419,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center">
-              <Sparkles size={11} className="sm:size-13 text-white" />
+              <Sparkles size={13} className="text-white" />
             </div>
             <span className="font-display font-bold text-xs sm:text-sm gradient-text-purple">AI Workspace</span>
           </div>

@@ -434,7 +434,7 @@ export default function ChatPage() {
                 onClick={handleNewChat}
                 className="w-full flex items-center gap-2 bg-gradient-to-r from-violet-600 to-blue-600 text-white text-xs sm:text-sm font-medium px-3 py-2 sm:py-2.5 rounded-lg"
               >
-                <Plus size={14} className="sm:size-16" />
+                <Plus size={16} />
                 <span className="hidden sm:inline">New Chat</span>
                 <span className="sm:hidden">New</span>
               </motion.button>
@@ -481,13 +481,13 @@ export default function ChatPage() {
                         : isDark ? 'text-white/50 hover:bg-white/[0.04] hover:text-white/80' : 'text-gray-600 hover:bg-gray-50'
                     )}
                   >
-                    <MessageSquare size={12} className="sm:size-14 flex-shrink-0" />
+                    <MessageSquare size={14} className="flex-shrink-0" />
                     <span className="flex-1 truncate">{chat.title || 'New Chat'}</span>
                     <button
                       onClick={(e) => handleDeleteChat(chat.id, e)}
                       className="opacity-0 group-hover:opacity-100 text-red-400/60 hover:text-red-400 transition-all"
                     >
-                      <Trash2 size={12} className="sm:size-13" />
+                      <Trash2 size={13} />
                     </button>
                   </motion.div>
                 ))}
@@ -507,7 +507,7 @@ export default function ChatPage() {
             onClick={() => setSidebarOpen(!sidebarOpen)}
             className={cn('p-1.5 rounded-md transition-colors', isDark ? 'text-white/40 hover:text-white/70 hover:bg-white/[0.06]' : 'text-gray-400 hover:text-gray-700 hover:bg-gray-100')}
           >
-            {sidebarOpen ? <X size={14} className="sm:size-16" /> : <Menu size={14} className="sm:size-16" />}
+            {sidebarOpen ? <X size={16} /> : <Menu size={16} />}
           </button>
           <span className={cn('text-xs sm:text-sm font-medium truncate', isDark ? 'text-white/70' : 'text-gray-700')}>
             {currentChat?.title || 'New Chat'}
@@ -523,7 +523,7 @@ export default function ChatPage() {
                 animate={{ scale: 1, opacity: 1 }}
                 className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center mb-3 sm:mb-4 glow-purple"
               >
-                <Sparkles size={22} className="sm:size-28 text-white" />
+                <Sparkles size={28} className="text-white" />
               </motion.div>
               <h2 className={cn('font-display text-lg sm:text-xl font-bold mb-2', isDark ? 'text-white' : 'text-gray-900')}>
                 What can I help you with?
@@ -575,7 +575,7 @@ export default function ChatPage() {
                       >
                         {msg.role === 'assistant' && (
                           <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center flex-shrink-0 mt-1">
-                            <Sparkles size={12} className="sm:size-14 text-white" />
+                            <Sparkles size={14} className="text-white" />
                           </div>
                         )}
                         <div className={cn(
@@ -610,7 +610,7 @@ export default function ChatPage() {
                       className="flex gap-3 justify-start"
                     >
                       <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center flex-shrink-0 mt-1">
-                        <Sparkles size={12} className="sm:size-14 text-white" />
+                        <Sparkles size={14} className="text-white" />
                       </div>
                       <div className={cn(
                         'max-w-[85%] sm:max-w-[80%] rounded-xl sm:rounded-2xl rounded-bl-sm px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm leading-relaxed',
@@ -678,7 +678,7 @@ export default function ChatPage() {
                 )}
                 title={isListening ? 'Stop listening' : 'Voice input'}
               >
-                {isListening ? <MicOff size={14} className="sm:size-16" /> : <Mic size={14} className="sm:size-16" />}
+                {isListening ? <MicOff size={16} /> : <Mic size={16} />}
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -688,9 +688,9 @@ export default function ChatPage() {
                 className="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-gradient-to-r from-violet-600 to-blue-600 flex items-center justify-center disabled:opacity-40 transition-all"
               >
                 {isStreaming ? (
-                  <Loader2 size={14} className="sm:size-16 text-white animate-spin" />
+                  <Loader2 size={16} className="text-white animate-spin" />
                 ) : (
-                  <Send size={14} className="sm:size-16 text-white" />
+                  <Send size={16} className="text-white" />
                 )}
               </motion.button>
             </div>

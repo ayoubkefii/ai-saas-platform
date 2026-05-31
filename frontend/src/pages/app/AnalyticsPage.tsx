@@ -166,7 +166,7 @@ export default function AnalyticsPage() {
               className={cn("rounded-xl sm:rounded-2xl p-4 sm:p-6", isDark ? "glass-premium" : "glass-card-light")}
             >
               <h3 className={cn("font-semibold mb-4 sm:mb-6 flex items-center gap-2 text-sm sm:text-base", isDark ? "text-white" : "text-gray-900")}>
-                <Activity size={16} className={cn("sm:size-20", isDark ? "text-violet-400" : "text-violet-600")} />
+                <Activity size={20} className={isDark ? "text-violet-400" : "text-violet-600"} />
                 Chat Activity
               </h3>
               <ResponsiveContainer width="100%" height={250}>
@@ -206,7 +206,7 @@ export default function AnalyticsPage() {
               className={cn("rounded-xl sm:rounded-2xl p-4 sm:p-6", isDark ? "glass-premium" : "glass-card-light")}
             >
               <h3 className={cn("font-semibold mb-4 sm:mb-6 flex items-center gap-2 text-sm sm:text-base", isDark ? "text-white" : "text-gray-900")}>
-                <CheckCircle size={16} className={cn("sm:size-20", isDark ? "text-emerald-400" : "text-emerald-600")} />
+                <CheckCircle size={20} className={isDark ? "text-emerald-400" : "text-emerald-600"} />
                 Task Completion
               </h3>
               <ResponsiveContainer width="100%" height={250}>
@@ -234,7 +234,7 @@ export default function AnalyticsPage() {
               className={cn("rounded-xl sm:rounded-2xl p-4 sm:p-6", isDark ? "glass-premium" : "glass-card-light")}
             >
               <h3 className={cn("font-semibold mb-4 sm:mb-6 flex items-center gap-2 text-sm sm:text-base", isDark ? "text-white" : "text-gray-900")}>
-                <FileText size={16} className={cn("sm:size-20", isDark ? "text-cyan-400" : "text-cyan-600")} />
+                <FileText size={20} className={isDark ? "text-cyan-400" : "text-cyan-600"} />
                 Document Types
               </h3>
               <ResponsiveContainer width="100%" height={250}>
@@ -270,7 +270,7 @@ export default function AnalyticsPage() {
               className={cn("rounded-xl sm:rounded-2xl p-4 sm:p-6", isDark ? "glass-premium" : "glass-card-light")}
             >
               <h3 className={cn("font-semibold mb-4 sm:mb-6 flex items-center gap-2 text-sm sm:text-base", isDark ? "text-white" : "text-gray-900")}>
-                <Zap size={16} className={cn("sm:size-20", isDark ? "text-yellow-400" : "text-yellow-600")} />
+                <Zap size={20} className={isDark ? "text-yellow-400" : "text-yellow-600"} />
                 AI Response Time
               </h3>
               <ResponsiveContainer width="100%" height={250}>
@@ -304,7 +304,7 @@ export default function AnalyticsPage() {
             className={cn("rounded-xl sm:rounded-2xl p-4 sm:p-6", isDark ? "glass-premium" : "glass-card-light")}
           >
             <h3 className={cn("font-semibold mb-4 sm:mb-6 flex items-center gap-2 text-sm sm:text-base", isDark ? "text-white" : "text-gray-900")}>
-              <Users size={16} className={cn("sm:size-20", isDark ? "text-blue-400" : "text-blue-600")} />
+              <Users size={20} className={isDark ? "text-blue-400" : "text-blue-600"} />
               Team Activity
             </h3>
             <div className="space-y-3 sm:space-y-4">
