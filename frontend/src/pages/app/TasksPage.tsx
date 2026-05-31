@@ -446,44 +446,44 @@ export default function TasksPage() {
   return (
     <div className={cn('h-full flex flex-col', isDark ? '' : 'bg-gray-50')}>
       {/* Header */}
-      <div className={cn('flex items-center justify-between px-6 py-4 border-b', isDark ? 'border-white/[0.06]' : 'border-gray-200')}>
+      <div className={cn('flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0 px-4 sm:px-6 py-3 sm:py-4 border-b', isDark ? 'border-white/[0.06]' : 'border-gray-200')}>
         <div>
-          <h1 className={cn('font-display font-bold text-xl', isDark ? 'text-white' : 'text-gray-900')}>Tasks</h1>
+          <h1 className={cn('font-display font-bold text-lg sm:text-xl', isDark ? 'text-white' : 'text-gray-900')}>Tasks</h1>
           <p className={cn('text-xs mt-0.5', isDark ? 'text-white/40' : 'text-gray-500')}>
             {tasks.filter(t => t.status === 'done').length} of {tasks.length} completed
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto overflow-x-auto pb-2 sm:pb-0">
           {/* Search */}
           <div className={cn(
-            'flex items-center gap-2 px-3 py-2 rounded-lg border transition-all',
+            'flex items-center gap-2 px-3 py-2 rounded-lg border transition-all flex-shrink-0',
             isDark ? 'bg-white/[0.03] border-white/[0.08] focus-within:border-violet-500/40' : 'bg-white border-gray-200 focus-within:border-violet-400'
           )}>
-            <Search size={16} className={isDark ? 'text-white/30' : 'text-gray-400'} />
+            <Search size={14} className={cn("sm:size-16", isDark ? 'text-white/30' : 'text-gray-400')} />
             <input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search tasks..."
-              className={cn('bg-transparent text-sm outline-none w-40', isDark ? 'text-white placeholder-white/30' : 'text-gray-900 placeholder-gray-400')}
+              placeholder="Search..."
+              className={cn('bg-transparent text-xs sm:text-sm outline-none w-24 sm:w-40', isDark ? 'text-white placeholder-white/30' : 'text-gray-900 placeholder-gray-400')}
             />
           </div>
 
           {/* Filter */}
-          <div className="relative">
+          <div className="relative flex-shrink-0">
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               onClick={() => setShowFilters(!showFilters)}
               className={cn(
-                'flex items-center gap-2 px-3 py-2 rounded-lg border transition-all',
+                'flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2 rounded-lg border transition-all',
                 isDark ? 'bg-white/[0.03] border-white/[0.08] hover:border-violet-500/40' : 'bg-white border-gray-200 hover:border-violet-400'
               )}
             >
-              <Filter size={16} className={isDark ? 'text-white/30' : 'text-gray-400'} />
-              <span className={cn('text-sm', isDark ? 'text-white/60' : 'text-gray-600')}>
+              <Filter size={14} className={cn("sm:size-16", isDark ? 'text-white/30' : 'text-gray-400')} />
+              <span className={cn('text-xs sm:text-sm hidden sm:inline', isDark ? 'text-white/60' : 'text-gray-600')}>
                 {filterPriority === 'all' ? 'All' : PRIORITY_CONFIG[filterPriority].label}
               </span>
-              <ChevronDown size={14} className={isDark ? 'text-white/30' : 'text-gray-400'} />
+              <ChevronDown size={12} className={cn("sm:size-14", isDark ? 'text-white/30' : 'text-gray-400')} />
             </motion.button>
 
             <AnimatePresence>
@@ -517,7 +517,7 @@ export default function TasksPage() {
           </div>
 
           {/* Export/Import */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-shrink-0">
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
@@ -528,13 +528,13 @@ export default function TasksPage() {
               )}
               title="Export tasks"
             >
-              <Download size={16} className={isDark ? 'text-white/30' : 'text-gray-400'} />
+              <Download size={14} className={cn("sm:size-16", isDark ? 'text-white/30' : 'text-gray-400')} />
             </motion.button>
             <label className={cn(
               'p-2 rounded-lg border transition-all cursor-pointer',
               isDark ? 'bg-white/[0.03] border-white/[0.08] hover:border-violet-500/40' : 'bg-white border-gray-200 hover:border-violet-400'
             )} title="Import tasks">
-              <Upload size={16} className={isDark ? 'text-white/30' : 'text-gray-400'} />
+              <Upload size={14} className={cn("sm:size-16", isDark ? 'text-white/30' : 'text-gray-400')} />
               <input
                 type="file"
                 accept=".json"
@@ -545,7 +545,7 @@ export default function TasksPage() {
           </div>
 
           {/* Templates */}
-          <div className="relative">
+          <div className="relative flex-shrink-0 hidden sm:block">
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
@@ -598,18 +598,18 @@ export default function TasksPage() {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             onClick={() => { setDefaultStatus('todo'); setShowModal(true) }}
-            className="flex items-center gap-2 bg-gradient-to-r from-violet-600 to-blue-600 text-white text-sm font-medium px-4 py-2 rounded-lg"
+            className="flex items-center gap-2 bg-gradient-to-r from-violet-600 to-blue-600 text-white text-xs sm:text-sm font-medium px-3 sm:px-4 py-2 rounded-lg flex-shrink-0"
         >
-          <Plus size={16} />
-          Add Task
+          <Plus size={14} className="sm:size-16" />
+          <span className="hidden sm:inline">Add Task</span>
         </motion.button>
         </div>
       </div>
 
       {/* Kanban Board */}
-      <div className="flex-1 overflow-auto p-6">
+      <div className="flex-1 overflow-auto p-4 sm:p-6">
         {isLoading ? (
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {COLUMNS.map((col) => (
               <div key={col.id} className="space-y-3">
                 <div className="skeleton h-8 rounded-lg" />
@@ -627,24 +627,24 @@ export default function TasksPage() {
             onDragOver={handleDragOver}
             onDragEnd={handleDragEnd}
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 min-h-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 min-h-full">
               {COLUMNS.map((col) => {
                 const columnTasks = getTasksByStatus(col.status)
                 return (
                   <div
                     key={col.id}
                     className={cn(
-                      'rounded-2xl p-4 min-h-[400px]',
+                      'rounded-xl sm:rounded-2xl p-3 sm:p-4 min-h-[300px] sm:min-h-[400px]',
                       isDark ? 'bg-white/[0.02] border border-white/[0.05]' : 'bg-gray-100/60 border border-gray-200'
                     )}
                   >
                     {/* Column Header */}
-                    <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center justify-between mb-3 sm:mb-4">
                       <div className="flex items-center gap-2">
-                        <div className={cn('w-2.5 h-2.5 rounded-full', col.color)} />
-                        <span className={cn('text-sm font-semibold', isDark ? 'text-white/70' : 'text-gray-700')}>{col.title}</span>
+                        <div className={cn('w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full', col.color)} />
+                        <span className={cn('text-xs sm:text-sm font-semibold', isDark ? 'text-white/70' : 'text-gray-700')}>{col.title}</span>
                         <span className={cn(
-                          'text-xs px-1.5 py-0.5 rounded-full font-medium',
+                          'text-[10px] sm:text-xs px-1.5 py-0.5 rounded-full font-medium',
                           isDark ? 'bg-white/[0.06] text-white/40' : 'bg-gray-200 text-gray-500'
                         )}>{columnTasks.length}</span>
                       </div>
@@ -652,7 +652,7 @@ export default function TasksPage() {
                         onClick={() => { setDefaultStatus(col.status); setShowModal(true) }}
                         className={cn('p-1 rounded-md transition-colors', isDark ? 'text-white/20 hover:text-white/50 hover:bg-white/[0.06]' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-200')}
                       >
-                        <Plus size={14} />
+                        <Plus size={12} className="sm:size-14" />
                       </button>
                     </div>
 
@@ -673,7 +673,7 @@ export default function TasksPage() {
                     {columnTasks.length === 0 && (
                       <div
                         className={cn(
-                          'h-24 rounded-xl border-2 border-dashed flex items-center justify-center text-xs cursor-pointer transition-colors',
+                          'h-20 sm:h-24 rounded-lg sm:rounded-xl border-2 border-dashed flex items-center justify-center text-[10px] sm:text-xs cursor-pointer transition-colors px-2 text-center',
                           isDark ? 'border-white/[0.06] text-white/20 hover:border-violet-500/30' : 'border-gray-200 text-gray-400 hover:border-violet-300'
                         )}
                         onClick={() => { setDefaultStatus(col.status); setShowModal(true) }}

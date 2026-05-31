@@ -409,25 +409,34 @@ export default function ChatPage() {
       {/* Chat Sidebar */}
       <AnimatePresence>
         {sidebarOpen && (
-          <motion.aside
-            initial={{ width: 0, opacity: 0 }}
-            animate={{ width: 260, opacity: 1 }}
-            exit={{ width: 0, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className={cn(
-              'flex flex-col border-r overflow-hidden flex-shrink-0',
-              isDark ? 'bg-[#0a0a1a] border-white/[0.06]' : 'bg-white border-gray-200'
-            )}
-          >
-            <div className={cn('p-4 border-b', isDark ? 'border-white/[0.06]' : 'border-gray-200')}>
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSidebarOpen(false)}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 sm:hidden"
+            />
+            <motion.aside
+              initial={{ width: 0, opacity: 0 }}
+              animate={{ width: '260px', opacity: 1 }}
+              exit={{ width: 0, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className={cn(
+                'fixed sm:relative z-40 flex flex-col border-r overflow-hidden flex-shrink-0 h-full',
+                isDark ? 'bg-[#0a0a1a] border-white/[0.06]' : 'bg-white border-gray-200'
+              )}
+            >
+            <div className={cn('p-3 sm:p-4 border-b', isDark ? 'border-white/[0.06]' : 'border-gray-200')}>
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={handleNewChat}
-                className="w-full flex items-center gap-2 bg-gradient-to-r from-violet-600 to-blue-600 text-white text-sm font-medium px-3 py-2.5 rounded-lg"
+                className="w-full flex items-center gap-2 bg-gradient-to-r from-violet-600 to-blue-600 text-white text-xs sm:text-sm font-medium px-3 py-2 sm:py-2.5 rounded-lg"
               >
-                <Plus size={16} />
-                New Chat
+                <Plus size={14} className="sm:size-16" />
+                <span className="hidden sm:inline">New Chat</span>
+                <span className="sm:hidden">New</span>
               </motion.button>
             </div>
 
@@ -464,21 +473,21 @@ export default function ChatPage() {
                   <motion.div
                     key={chat.id}
                     whileHover={{ x: 2 }}
-                    onClick={() => navigate(`/app/chat/${chat.id}`)}
+                    onClick={() => { navigate(`/app/chat/${chat.id}`); setSidebarOpen(false) }}
                     className={cn(
-                      'group flex items-center gap-2 px-3 py-2.5 rounded-lg cursor-pointer text-sm mb-1 transition-all',
+                      'group flex items-center gap-2 px-3 py-2 sm:py-2.5 rounded-lg cursor-pointer text-xs sm:text-sm mb-1 transition-all',
                       chatId === chat.id
                         ? isDark ? 'bg-violet-500/15 text-violet-300' : 'bg-violet-50 text-violet-700'
                         : isDark ? 'text-white/50 hover:bg-white/[0.04] hover:text-white/80' : 'text-gray-600 hover:bg-gray-50'
                     )}
                   >
-                    <MessageSquare size={14} className="flex-shrink-0" />
+                    <MessageSquare size={12} className="sm:size-14 flex-shrink-0" />
                     <span className="flex-1 truncate">{chat.title || 'New Chat'}</span>
                     <button
                       onClick={(e) => handleDeleteChat(chat.id, e)}
                       className="opacity-0 group-hover:opacity-100 text-red-400/60 hover:text-red-400 transition-all"
                     >
-                      <Trash2 size={13} />
+                      <Trash2 size={12} className="sm:size-13" />
                     </button>
                   </motion.div>
                 ))}
@@ -486,20 +495,21 @@ export default function ChatPage() {
               )}
             </div>
           </motion.aside>
+          </>
         )}
       </AnimatePresence>
 
       {/* Main Chat Area */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Chat Header */}
-        <div className={cn('h-12 flex items-center gap-3 px-4 border-b flex-shrink-0', isDark ? 'border-white/[0.06]' : 'border-gray-200')}>
+        <div className={cn('h-12 flex items-center gap-2 sm:gap-3 px-3 sm:px-4 border-b flex-shrink-0', isDark ? 'border-white/[0.06]' : 'border-gray-200')}>
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
             className={cn('p-1.5 rounded-md transition-colors', isDark ? 'text-white/40 hover:text-white/70 hover:bg-white/[0.06]' : 'text-gray-400 hover:text-gray-700 hover:bg-gray-100')}
           >
-            {sidebarOpen ? <X size={16} /> : <Menu size={16} />}
+            {sidebarOpen ? <X size={14} className="sm:size-16" /> : <Menu size={14} className="sm:size-16" />}
           </button>
-          <span className={cn('text-sm font-medium', isDark ? 'text-white/70' : 'text-gray-700')}>
+          <span className={cn('text-xs sm:text-sm font-medium truncate', isDark ? 'text-white/70' : 'text-gray-700')}>
             {currentChat?.title || 'New Chat'}
           </span>
         </div>
@@ -507,21 +517,21 @@ export default function ChatPage() {
         {/* Messages */}
         <div className="flex-1 overflow-y-auto">
           {!chatId && !isStreaming ? (
-            <div className="h-full flex flex-col items-center justify-center p-8 text-center">
+            <div className="h-full flex flex-col items-center justify-center p-4 sm:p-8 text-center">
               <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
-                className="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center mb-4 glow-purple"
+                className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center mb-3 sm:mb-4 glow-purple"
               >
-                <Sparkles size={28} className="text-white" />
+                <Sparkles size={22} className="sm:size-28 text-white" />
               </motion.div>
-              <h2 className={cn('font-display text-xl font-bold mb-2', isDark ? 'text-white' : 'text-gray-900')}>
+              <h2 className={cn('font-display text-lg sm:text-xl font-bold mb-2', isDark ? 'text-white' : 'text-gray-900')}>
                 What can I help you with?
               </h2>
-              <p className={cn('text-sm mb-8 max-w-sm', isDark ? 'text-white/40' : 'text-gray-500')}>
+              <p className={cn('text-xs sm:text-sm mb-6 sm:mb-8 max-w-sm', isDark ? 'text-white/40' : 'text-gray-500')}>
                 Powered by Llama 3 70B via Groq. Ask me anything — code, writing, analysis, math.
               </p>
-              <div className="grid grid-cols-2 gap-3 max-w-lg w-full">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 max-w-lg w-full px-2">
                 {[
                   '✍️ Write a blog post about AI trends',
                   '🐍 Write a Python web scraper',
@@ -534,7 +544,7 @@ export default function ChatPage() {
                     whileTap={{ scale: 0.97 }}
                     onClick={() => setInput(prompt.slice(3))}
                     className={cn(
-                      'text-left text-sm px-4 py-3 rounded-xl transition-all relative overflow-hidden',
+                      'text-left text-xs sm:text-sm px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg sm:rounded-xl transition-all relative overflow-hidden',
                       isDark ? 'glass-premium holographic text-white/60 hover:text-white/80 shimmer-effect' : 'glass-card-light text-gray-600 hover:text-gray-900'
                     )}
                   >
@@ -544,7 +554,7 @@ export default function ChatPage() {
               </div>
             </div>
           ) : (
-            <div className="max-w-3xl mx-auto px-4 py-6 space-y-6">
+            <div className="max-w-3xl mx-auto px-3 sm:px-4 py-4 sm:py-6 space-y-4 sm:space-y-6">
               {isLoadingMessages ? (
                 <div className="space-y-4">
                   {Array.from({ length: 3 }).map((_, i) => (
@@ -564,12 +574,12 @@ export default function ChatPage() {
                         className={cn('flex gap-3', msg.role === 'user' ? 'justify-end' : 'justify-start')}
                       >
                         {msg.role === 'assistant' && (
-                          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center flex-shrink-0 mt-1">
-                            <Sparkles size={14} className="text-white" />
+                          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center flex-shrink-0 mt-1">
+                            <Sparkles size={12} className="sm:size-14 text-white" />
                           </div>
                         )}
                         <div className={cn(
-                          'max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed relative overflow-hidden',
+                          'max-w-[85%] sm:max-w-[80%] rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm leading-relaxed relative overflow-hidden',
                           msg.role === 'user'
                             ? 'bg-gradient-animated text-white rounded-br-sm shimmer-effect'
                             : isDark ? 'glass-premium border border-white/[0.08] text-white/85 rounded-bl-sm hover:border-violet-500/30' : 'bg-white border border-gray-200 text-gray-800 rounded-bl-sm'
@@ -599,11 +609,11 @@ export default function ChatPage() {
                       animate={{ opacity: 1, y: 0 }}
                       className="flex gap-3 justify-start"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center flex-shrink-0 mt-1">
-                        <Sparkles size={14} className="text-white" />
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center flex-shrink-0 mt-1">
+                        <Sparkles size={12} className="sm:size-14 text-white" />
                       </div>
                       <div className={cn(
-                        'max-w-[80%] rounded-2xl rounded-bl-sm px-4 py-3 text-sm leading-relaxed',
+                        'max-w-[85%] sm:max-w-[80%] rounded-xl sm:rounded-2xl rounded-bl-sm px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm leading-relaxed',
                         isDark ? 'bg-white/[0.04] border border-white/[0.06] text-white/85' : 'bg-white border border-gray-200 text-gray-800'
                       )}>
                         <div className="prose-dark">
@@ -611,7 +621,7 @@ export default function ChatPage() {
                             {streamingContent}
                           </ReactMarkdown>
                         </div>
-                        <span className="inline-block w-2 h-4 bg-violet-400 animate-pulse ml-0.5 align-middle" />
+                        <span className="inline-block w-2 h-3 sm:h-4 bg-violet-400 animate-pulse ml-0.5 align-middle" />
                       </div>
                     </motion.div>
                   )}
@@ -638,10 +648,10 @@ export default function ChatPage() {
         </div>
 
         {/* Input */}
-        <div className={cn('p-4 border-t', isDark ? 'border-white/[0.06] bg-[#060611]/90 backdrop-blur-sm' : 'border-gray-200 bg-white')}>
+        <div className={cn('p-3 sm:p-4 border-t', isDark ? 'border-white/[0.06] bg-[#060611]/90 backdrop-blur-sm' : 'border-gray-200 bg-white')}>
           <div className="max-w-3xl mx-auto">
             <div className={cn(
-              'flex gap-3 items-end rounded-xl border p-3 transition-all',
+              'flex gap-2 sm:gap-3 items-end rounded-xl border p-2.5 sm:p-3 transition-all',
               isDark ? 'bg-white/[0.03] border-white/[0.08] focus-within:border-violet-500/40' : 'bg-white border-gray-200 focus-within:border-violet-400'
             )}>
               <textarea
@@ -652,7 +662,7 @@ export default function ChatPage() {
                 placeholder="Ask anything... (Shift+Enter for new line)"
                 rows={1}
                 className={cn(
-                  'flex-1 bg-transparent text-sm resize-none outline-none max-h-48',
+                  'flex-1 bg-transparent text-xs sm:text-sm resize-none outline-none max-h-36 sm:max-h-48',
                   isDark ? 'text-white placeholder-white/20' : 'text-gray-900 placeholder-gray-400'
                 )}
               />
@@ -661,30 +671,30 @@ export default function ChatPage() {
                 whileTap={{ scale: 0.95 }}
                 onClick={toggleListening}
                 className={cn(
-                  'flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center transition-all mr-2',
+                  'flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center transition-all',
                   isListening
                     ? 'bg-red-500/20 text-red-400 animate-pulse'
                     : 'text-white/30 hover:text-white/60 hover:bg-white/[0.05]'
                 )}
                 title={isListening ? 'Stop listening' : 'Voice input'}
               >
-                {isListening ? <MicOff size={16} /> : <Mic size={16} />}
+                {isListening ? <MicOff size={14} className="sm:size-16" /> : <Mic size={14} className="sm:size-16" />}
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleSend}
                 disabled={!input.trim() || isStreaming}
-                className="flex-shrink-0 w-9 h-9 rounded-lg bg-gradient-to-r from-violet-600 to-blue-600 flex items-center justify-center disabled:opacity-40 transition-all"
+                className="flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-gradient-to-r from-violet-600 to-blue-600 flex items-center justify-center disabled:opacity-40 transition-all"
               >
                 {isStreaming ? (
-                  <Loader2 size={16} className="text-white animate-spin" />
+                  <Loader2 size={14} className="sm:size-16 text-white animate-spin" />
                 ) : (
-                  <Send size={16} className="text-white" />
+                  <Send size={14} className="sm:size-16 text-white" />
                 )}
               </motion.button>
             </div>
-            <p className={cn('text-xs mt-2 text-center', isDark ? 'text-white/20' : 'text-gray-400')}>
+            <p className={cn('text-[10px] sm:text-xs mt-2 text-center', isDark ? 'text-white/20' : 'text-gray-400')}>
               AI Workspace uses Groq Llama 3 70B · Responses may contain errors
             </p>
 

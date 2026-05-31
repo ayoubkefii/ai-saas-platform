@@ -34,12 +34,13 @@ interface AnalyticsData {
   teamActivity: Array<{ name: string; status: string; activity: string }>
 }
 
-const StatCard = ({ title, value, change, icon: Icon, trend }: {
+const StatCard = ({ title, value, change, icon: Icon, trend, isDark }: {
   title: string
   value: string | number
   change: number
   icon: any
   trend: 'up' | 'down'
+  isDark: boolean
 }) => (
   <motion.div
     whileHover={{ y: -4, scale: 1.02 }}
@@ -118,17 +119,18 @@ export default function AnalyticsPage() {
         >
           <div className="mb-8">
             <h1 className={cn("font-display text-3xl font-bold mb-2", isDark ? "text-white" : "text-gray-900")}>Analytics Dashboard</h1>
-            <p className={isDark ? "text-white/50" : "text-gray-600")}>Track your team's productivity and AI usage</p>
+            <p className={isDark ? "text-white/50" : "text-gray-600"}>Track your team's productivity and AI usage</p>
           </div>
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
             <StatCard
               title="Total Messages"
               value={data.stats.totalMessages.toLocaleString()}
               change={data.changes.messageChange}
               icon={MessageSquare}
               trend={data.changes.messageChange >= 0 ? 'up' : 'down'}
+              isDark={isDark}
             />
             <StatCard
               title="Tasks Completed"
@@ -136,6 +138,7 @@ export default function AnalyticsPage() {
               change={data.changes.taskChange}
               icon={CheckCircle}
               trend={data.changes.taskChange >= 0 ? 'up' : 'down'}
+              isDark={isDark}
             />
             <StatCard
               title="Documents Analyzed"
@@ -143,6 +146,7 @@ export default function AnalyticsPage() {
               change={data.changes.documentChange}
               icon={FileText}
               trend={data.changes.documentChange >= 0 ? 'up' : 'down'}
+              isDark={isDark}
             />
             <StatCard
               title="Avg Response Time"
@@ -150,21 +154,22 @@ export default function AnalyticsPage() {
               change={data.changes.responseTimeChange}
               icon={Zap}
               trend={data.changes.responseTimeChange >= 0 ? 'up' : 'down'}
+              isDark={isDark}
             />
           </div>
 
           {/* Charts Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
             {/* Chat Activity */}
             <motion.div
               whileHover={{ y: -2 }}
-              className={cn("rounded-2xl p-6", isDark ? "glass-premium" : "glass-card-light")}
+              className={cn("rounded-xl sm:rounded-2xl p-4 sm:p-6", isDark ? "glass-premium" : "glass-card-light")}
             >
-              <h3 className={cn("font-semibold mb-6 flex items-center gap-2", isDark ? "text-white" : "text-gray-900")}>
-                <Activity size={20} className={isDark ? "text-violet-400" : "text-violet-600"} />
+              <h3 className={cn("font-semibold mb-4 sm:mb-6 flex items-center gap-2 text-sm sm:text-base", isDark ? "text-white" : "text-gray-900")}>
+                <Activity size={16} className={cn("sm:size-20", isDark ? "text-violet-400" : "text-violet-600")} />
                 Chat Activity
               </h3>
-              <ResponsiveContainer width="100%" height={300}>
+              <ResponsiveContainer width="100%" height={250}>
                 <AreaChart data={data.chatActivity}>
                   <defs>
                     <linearGradient id="colorMessages" x1="0" y1="0" x2="0" y2="1">
@@ -198,13 +203,13 @@ export default function AnalyticsPage() {
             {/* Task Completion */}
             <motion.div
               whileHover={{ y: -2 }}
-              className={cn("rounded-2xl p-6", isDark ? "glass-premium" : "glass-card-light")}
+              className={cn("rounded-xl sm:rounded-2xl p-4 sm:p-6", isDark ? "glass-premium" : "glass-card-light")}
             >
-              <h3 className={cn("font-semibold mb-6 flex items-center gap-2", isDark ? "text-white" : "text-gray-900")}>
-                <CheckCircle size={20} className={isDark ? "text-emerald-400" : "text-emerald-600"} />
+              <h3 className={cn("font-semibold mb-4 sm:mb-6 flex items-center gap-2 text-sm sm:text-base", isDark ? "text-white" : "text-gray-900")}>
+                <CheckCircle size={16} className={cn("sm:size-20", isDark ? "text-emerald-400" : "text-emerald-600")} />
                 Task Completion
               </h3>
-              <ResponsiveContainer width="100%" height={300}>
+              <ResponsiveContainer width="100%" height={250}>
                 <BarChart data={data.taskCompletion}>
                   <CartesianGrid strokeDasharray="3 3" stroke={isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"} />
                   <XAxis dataKey="name" stroke={isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)"} />
@@ -226,13 +231,13 @@ export default function AnalyticsPage() {
             {/* Document Usage */}
             <motion.div
               whileHover={{ y: -2 }}
-              className={cn("rounded-2xl p-6", isDark ? "glass-premium" : "glass-card-light")}
+              className={cn("rounded-xl sm:rounded-2xl p-4 sm:p-6", isDark ? "glass-premium" : "glass-card-light")}
             >
-              <h3 className={cn("font-semibold mb-6 flex items-center gap-2", isDark ? "text-white" : "text-gray-900")}>
-                <FileText size={20} className={isDark ? "text-cyan-400" : "text-cyan-600"} />
+              <h3 className={cn("font-semibold mb-4 sm:mb-6 flex items-center gap-2 text-sm sm:text-base", isDark ? "text-white" : "text-gray-900")}>
+                <FileText size={16} className={cn("sm:size-20", isDark ? "text-cyan-400" : "text-cyan-600")} />
                 Document Types
               </h3>
-              <ResponsiveContainer width="100%" height={300}>
+              <ResponsiveContainer width="100%" height={250}>
                 <PieChart>
                   <Pie
                     data={data.documentUsage}
@@ -262,13 +267,13 @@ export default function AnalyticsPage() {
             {/* AI Performance */}
             <motion.div
               whileHover={{ y: -2 }}
-              className={cn("rounded-2xl p-6", isDark ? "glass-premium" : "glass-card-light")}
+              className={cn("rounded-xl sm:rounded-2xl p-4 sm:p-6", isDark ? "glass-premium" : "glass-card-light")}
             >
-              <h3 className={cn("font-semibold mb-6 flex items-center gap-2", isDark ? "text-white" : "text-gray-900")}>
-                <Zap size={20} className={isDark ? "text-yellow-400" : "text-yellow-600"} />
+              <h3 className={cn("font-semibold mb-4 sm:mb-6 flex items-center gap-2 text-sm sm:text-base", isDark ? "text-white" : "text-gray-900")}>
+                <Zap size={16} className={cn("sm:size-20", isDark ? "text-yellow-400" : "text-yellow-600")} />
                 AI Response Time
               </h3>
-              <ResponsiveContainer width="100%" height={300}>
+              <ResponsiveContainer width="100%" height={250}>
                 <LineChart data={data.aiPerformance}>
                   <CartesianGrid strokeDasharray="3 3" stroke={isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"} />
                   <XAxis dataKey="name" stroke={isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)"} />
@@ -296,36 +301,36 @@ export default function AnalyticsPage() {
           {/* Team Activity */}
           <motion.div
             whileHover={{ y: -2 }}
-            className={cn("rounded-2xl p-6", isDark ? "glass-premium" : "glass-card-light")}
+            className={cn("rounded-xl sm:rounded-2xl p-4 sm:p-6", isDark ? "glass-premium" : "glass-card-light")}
           >
-            <h3 className={cn("font-semibold mb-6 flex items-center gap-2", isDark ? "text-white" : "text-gray-900")}>
-              <Users size={20} className={isDark ? "text-blue-400" : "text-blue-600"} />
+            <h3 className={cn("font-semibold mb-4 sm:mb-6 flex items-center gap-2 text-sm sm:text-base", isDark ? "text-white" : "text-gray-900")}>
+              <Users size={16} className={cn("sm:size-20", isDark ? "text-blue-400" : "text-blue-600")} />
               Team Activity
             </h3>
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               {data.teamActivity.map((user, i) => (
                 <motion.div
                   key={user.name}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.1 }}
-                  className={cn("flex items-center gap-4 p-3 rounded-xl transition-colors", isDark ? "hover:bg-white/[0.03]" : "hover:bg-gray-100")}
+                  className={cn("flex items-center gap-3 sm:gap-4 p-2.5 sm:p-3 rounded-lg sm:rounded-xl transition-colors", isDark ? "hover:bg-white/[0.03]" : "hover:bg-gray-100")}
                 >
                   <div className="relative">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center text-white font-semibold">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center text-white font-semibold text-xs sm:text-sm">
                       {user.name.split(' ').map(n => n[0]).join('')}
                     </div>
                     <div className={cn(
-                      'absolute bottom-0 right-0 w-3 h-3 rounded-full border-2',
+                      'absolute bottom-0 right-0 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full border-2',
                       isDark ? 'border-[#060611]' : 'border-white',
                       user.status === 'online' ? 'bg-emerald-400' : user.status === 'away' ? 'bg-yellow-400' : 'bg-gray-400'
                     )} />
                   </div>
-                  <div className="flex-1">
-                    <p className={cn("font-medium", isDark ? "text-white" : "text-gray-900")}>{user.name}</p>
-                    <p className={cn("text-sm", isDark ? "text-white/40" : "text-gray-500")}>{user.activity}</p>
+                  <div className="flex-1 min-w-0">
+                    <p className={cn("font-medium text-xs sm:text-sm truncate", isDark ? "text-white" : "text-gray-900")}>{user.name}</p>
+                    <p className={cn("text-[10px] sm:text-xs truncate", isDark ? "text-white/40" : "text-gray-500")}>{user.activity}</p>
                   </div>
-                  <div className={cn("text-sm", isDark ? "text-white/30" : "text-gray-400")}>
+                  <div className={cn("text-[10px] sm:text-xs flex-shrink-0", isDark ? "text-white/30" : "text-gray-400")}>
                     {user.status === 'online' ? 'Active' : user.status === 'away' ? 'Away' : 'Offline'}
                   </div>
                 </motion.div>
