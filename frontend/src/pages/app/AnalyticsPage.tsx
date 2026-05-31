@@ -43,22 +43,22 @@ const StatCard = ({ title, value, change, icon: Icon, trend }: {
 }) => (
   <motion.div
     whileHover={{ y: -4, scale: 1.02 }}
-    className="glass-premium rounded-2xl p-6 shimmer-effect"
+    className={cn("rounded-2xl p-6 shimmer-effect", isDark ? "glass-premium" : "glass-card-light")}
   >
     <div className="flex items-start justify-between mb-4">
       <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500/20 to-blue-500/20 flex items-center justify-center">
-        <Icon size={24} className="text-violet-400" />
+        <Icon size={24} className={isDark ? "text-violet-400" : "text-violet-600"} />
       </div>
       <div className={cn(
         'flex items-center gap-1 text-sm font-medium',
-        trend === 'up' ? 'text-emerald-400' : 'text-red-400'
+        trend === 'up' ? (isDark ? 'text-emerald-400' : 'text-emerald-600') : (isDark ? 'text-red-400' : 'text-red-600')
       )}>
         {trend === 'up' ? <ArrowUpRight size={16} /> : <ArrowDownRight size={16} />}
         {Math.abs(change)}%
       </div>
     </div>
-    <h3 className="text-white/50 text-sm mb-1">{title}</h3>
-    <p className="text-3xl font-bold text-white">{value}</p>
+    <h3 className={cn("text-sm mb-1", isDark ? "text-white/50" : "text-gray-500")}>{title}</h3>
+    <p className={cn("text-3xl font-bold", isDark ? "text-white" : "text-gray-900")}>{value}</p>
   </motion.div>
 )
 
@@ -102,7 +102,7 @@ export default function AnalyticsPage() {
 
   if (!data) {
     return (
-      <div className="h-full flex items-center justify-center text-white/50">
+      <div className={cn("h-full flex items-center justify-center", isDark ? "text-white/50" : "text-gray-500")}>
         Failed to load analytics
       </div>
     )
@@ -117,8 +117,8 @@ export default function AnalyticsPage() {
           className="max-w-7xl mx-auto"
         >
           <div className="mb-8">
-            <h1 className="font-display text-3xl font-bold text-white mb-2">Analytics Dashboard</h1>
-            <p className="text-white/50">Track your team's productivity and AI usage</p>
+            <h1 className={cn("font-display text-3xl font-bold mb-2", isDark ? "text-white" : "text-gray-900")}>Analytics Dashboard</h1>
+            <p className={isDark ? "text-white/50" : "text-gray-600")}>Track your team's productivity and AI usage</p>
           </div>
 
           {/* Stats Grid */}
@@ -158,10 +158,10 @@ export default function AnalyticsPage() {
             {/* Chat Activity */}
             <motion.div
               whileHover={{ y: -2 }}
-              className="glass-premium rounded-2xl p-6"
+              className={cn("rounded-2xl p-6", isDark ? "glass-premium" : "glass-card-light")}
             >
-              <h3 className="text-white font-semibold mb-6 flex items-center gap-2">
-                <Activity size={20} className="text-violet-400" />
+              <h3 className={cn("font-semibold mb-6 flex items-center gap-2", isDark ? "text-white" : "text-gray-900")}>
+                <Activity size={20} className={isDark ? "text-violet-400" : "text-violet-600"} />
                 Chat Activity
               </h3>
               <ResponsiveContainer width="100%" height={300}>
@@ -172,14 +172,15 @@ export default function AnalyticsPage() {
                       <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-                  <XAxis dataKey="name" stroke="rgba(255,255,255,0.3)" />
-                  <YAxis stroke="rgba(255,255,255,0.3)" />
+                  <CartesianGrid strokeDasharray="3 3" stroke={isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"} />
+                  <XAxis dataKey="name" stroke={isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)"} />
+                  <YAxis stroke={isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)"} />
                   <Tooltip
                     contentStyle={{
-                      backgroundColor: 'rgba(10, 10, 17, 0.9)',
-                      border: '1px solid rgba(255,255,255,0.1)',
+                      backgroundColor: isDark ? 'rgba(10, 10, 17, 0.9)' : 'rgba(255, 255, 255, 0.95)',
+                      border: isDark ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.1)',
                       borderRadius: '8px',
+                      color: isDark ? 'white' : '#111',
                     }}
                   />
                   <Area
@@ -197,22 +198,23 @@ export default function AnalyticsPage() {
             {/* Task Completion */}
             <motion.div
               whileHover={{ y: -2 }}
-              className="glass-premium rounded-2xl p-6"
+              className={cn("rounded-2xl p-6", isDark ? "glass-premium" : "glass-card-light")}
             >
-              <h3 className="text-white font-semibold mb-6 flex items-center gap-2">
-                <CheckCircle size={20} className="text-emerald-400" />
+              <h3 className={cn("font-semibold mb-6 flex items-center gap-2", isDark ? "text-white" : "text-gray-900")}>
+                <CheckCircle size={20} className={isDark ? "text-emerald-400" : "text-emerald-600"} />
                 Task Completion
               </h3>
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={data.taskCompletion}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-                  <XAxis dataKey="name" stroke="rgba(255,255,255,0.3)" />
-                  <YAxis stroke="rgba(255,255,255,0.3)" />
+                  <CartesianGrid strokeDasharray="3 3" stroke={isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"} />
+                  <XAxis dataKey="name" stroke={isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)"} />
+                  <YAxis stroke={isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)"} />
                   <Tooltip
                     contentStyle={{
-                      backgroundColor: 'rgba(10, 10, 17, 0.9)',
-                      border: '1px solid rgba(255,255,255,0.1)',
+                      backgroundColor: isDark ? 'rgba(10, 10, 17, 0.9)' : 'rgba(255, 255, 255, 0.95)',
+                      border: isDark ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.1)',
                       borderRadius: '8px',
+                      color: isDark ? 'white' : '#111',
                     }}
                   />
                   <Bar dataKey="completed" fill="#10b981" radius={[4, 4, 0, 0]} />
@@ -224,10 +226,10 @@ export default function AnalyticsPage() {
             {/* Document Usage */}
             <motion.div
               whileHover={{ y: -2 }}
-              className="glass-premium rounded-2xl p-6"
+              className={cn("rounded-2xl p-6", isDark ? "glass-premium" : "glass-card-light")}
             >
-              <h3 className="text-white font-semibold mb-6 flex items-center gap-2">
-                <FileText size={20} className="text-cyan-400" />
+              <h3 className={cn("font-semibold mb-6 flex items-center gap-2", isDark ? "text-white" : "text-gray-900")}>
+                <FileText size={20} className={isDark ? "text-cyan-400" : "text-cyan-600"} />
                 Document Types
               </h3>
               <ResponsiveContainer width="100%" height={300}>
@@ -247,9 +249,10 @@ export default function AnalyticsPage() {
                   </Pie>
                   <Tooltip
                     contentStyle={{
-                      backgroundColor: 'rgba(10, 10, 17, 0.9)',
-                      border: '1px solid rgba(255,255,255,0.1)',
+                      backgroundColor: isDark ? 'rgba(10, 10, 17, 0.9)' : 'rgba(255, 255, 255, 0.95)',
+                      border: isDark ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.1)',
                       borderRadius: '8px',
+                      color: isDark ? 'white' : '#111',
                     }}
                   />
                 </PieChart>
@@ -259,22 +262,23 @@ export default function AnalyticsPage() {
             {/* AI Performance */}
             <motion.div
               whileHover={{ y: -2 }}
-              className="glass-premium rounded-2xl p-6"
+              className={cn("rounded-2xl p-6", isDark ? "glass-premium" : "glass-card-light")}
             >
-              <h3 className="text-white font-semibold mb-6 flex items-center gap-2">
-                <Zap size={20} className="text-yellow-400" />
+              <h3 className={cn("font-semibold mb-6 flex items-center gap-2", isDark ? "text-white" : "text-gray-900")}>
+                <Zap size={20} className={isDark ? "text-yellow-400" : "text-yellow-600"} />
                 AI Response Time
               </h3>
               <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={data.aiPerformance}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-                  <XAxis dataKey="name" stroke="rgba(255,255,255,0.3)" />
-                  <YAxis stroke="rgba(255,255,255,0.3)" />
+                  <CartesianGrid strokeDasharray="3 3" stroke={isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"} />
+                  <XAxis dataKey="name" stroke={isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)"} />
+                  <YAxis stroke={isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.3)"} />
                   <Tooltip
                     contentStyle={{
-                      backgroundColor: 'rgba(10, 10, 17, 0.9)',
-                      border: '1px solid rgba(255,255,255,0.1)',
+                      backgroundColor: isDark ? 'rgba(10, 10, 17, 0.9)' : 'rgba(255, 255, 255, 0.95)',
+                      border: isDark ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.1)',
                       borderRadius: '8px',
+                      color: isDark ? 'white' : '#111',
                     }}
                   />
                   <Line
@@ -292,10 +296,10 @@ export default function AnalyticsPage() {
           {/* Team Activity */}
           <motion.div
             whileHover={{ y: -2 }}
-            className="glass-premium rounded-2xl p-6"
+            className={cn("rounded-2xl p-6", isDark ? "glass-premium" : "glass-card-light")}
           >
-            <h3 className="text-white font-semibold mb-6 flex items-center gap-2">
-              <Users size={20} className="text-blue-400" />
+            <h3 className={cn("font-semibold mb-6 flex items-center gap-2", isDark ? "text-white" : "text-gray-900")}>
+              <Users size={20} className={isDark ? "text-blue-400" : "text-blue-600"} />
               Team Activity
             </h3>
             <div className="space-y-4">
@@ -305,22 +309,23 @@ export default function AnalyticsPage() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.1 }}
-                  className="flex items-center gap-4 p-3 rounded-xl hover:bg-white/[0.03] transition-colors"
+                  className={cn("flex items-center gap-4 p-3 rounded-xl transition-colors", isDark ? "hover:bg-white/[0.03]" : "hover:bg-gray-100")}
                 >
                   <div className="relative">
                     <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-500 to-blue-500 flex items-center justify-center text-white font-semibold">
                       {user.name.split(' ').map(n => n[0]).join('')}
                     </div>
                     <div className={cn(
-                      'absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-[#060611]',
+                      'absolute bottom-0 right-0 w-3 h-3 rounded-full border-2',
+                      isDark ? 'border-[#060611]' : 'border-white',
                       user.status === 'online' ? 'bg-emerald-400' : user.status === 'away' ? 'bg-yellow-400' : 'bg-gray-400'
                     )} />
                   </div>
                   <div className="flex-1">
-                    <p className="text-white font-medium">{user.name}</p>
-                    <p className="text-white/40 text-sm">{user.activity}</p>
+                    <p className={cn("font-medium", isDark ? "text-white" : "text-gray-900")}>{user.name}</p>
+                    <p className={cn("text-sm", isDark ? "text-white/40" : "text-gray-500")}>{user.activity}</p>
                   </div>
-                  <div className="text-white/30 text-sm">
+                  <div className={cn("text-sm", isDark ? "text-white/30" : "text-gray-400")}>
                     {user.status === 'online' ? 'Active' : user.status === 'away' ? 'Away' : 'Offline'}
                   </div>
                 </motion.div>
