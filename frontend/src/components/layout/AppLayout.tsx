@@ -279,6 +279,26 @@ export default function AppLayout() {
                   </NavLink>
                 ))}
               </nav>
+
+              {/* User Section - Mobile */}
+              <div className="p-3 border-t border-white/[0.06]">
+                <div className="flex items-center gap-3 p-2 rounded-lg mb-2">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-400 to-blue-400 flex items-center justify-center flex-shrink-0 text-white text-xs font-bold">
+                    {user?.name?.charAt(0).toUpperCase() || 'U'}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-medium truncate text-white/80">{user?.name}</p>
+                    <p className="text-xs truncate text-white/40">{user?.email}</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => { handleLogout(); setMobileOpen(false); }}
+                  className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-red-400/70 hover:bg-red-500/10 hover:text-red-400 transition-colors"
+                >
+                  <LogOut size={16} className="flex-shrink-0" />
+                  Log out
+                </button>
+              </div>
             </motion.aside>
           </>
         )}
